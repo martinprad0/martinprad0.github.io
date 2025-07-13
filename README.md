@@ -61,4 +61,39 @@ export const prerender = true;
 ```
 - I created an empty file `static/.nojekyll`
 
-### 
+## GitHub Pages Deployment
+
+### Setting the repository
+On a fresh repository
+```bash
+git init
+git remote add origin https://github.com/username/project-name.git
+git add .
+git commit -m "first commit"
+git branch -M main
+git push -u origin main
+```
+
+If something related to authentication failed on the previous step. Authenticate by SSH remote URL (if you already have your SSH key pasted into your [GitHub Account](https://github.com/settings/keys)).
+```bash
+git remote set-url origin git@github.com:username/project-name.git
+```
+(Optional) you can generate this key with
+```bash
+ssh-keygen -t ed25519 -C "your_email@example.com"
+cat ~/.ssh/id_ed25519.pub # Paste this output on New SSH key
+```
+Now try to push again using
+```bash
+git push -u origin main
+```
+If you get
+```
+! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'github.com:username/project-name.git'
+```
+try again using `git push -u origin main --force`. The flag `--force` will nuke everything saved on GitHub so be careful.
+
+### GitHub Actions
+
+This is the last step to deploy the site with GitHub Pages. Go to your repository settings
